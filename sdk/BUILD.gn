@@ -170,7 +170,7 @@ if (is_ios || is_mac) {
 
     public_configs = [ ":common_config_objc" ]
 
-    if (is_ios) {
+    if (is_ios && !xros) {
       sources += [
         "objc/helpers/RTCCameraPreviewView.h",
         "objc/helpers/RTCCameraPreviewView.m",
@@ -1472,7 +1472,6 @@ if (is_ios || is_mac) {
           ":audio_objc",
           ":base_objc",
           ":default_codec_factory_objc",
-          ":metal_objc",
           ":native_api",
           ":native_video",
           ":peerconnectionfactory_base_objc",
@@ -1481,6 +1480,12 @@ if (is_ios || is_mac) {
           ":videotoolbox_objc",
           ":darwin_privacy_info",
         ]
+        if(!xros)
+        {
+          deps += [
+          ":metal_objc",
+          ]
+        }
         if (!build_with_chromium) {
           deps += [
             ":callback_logger_objc",
