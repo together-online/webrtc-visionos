@@ -78,6 +78,10 @@ typedef NS_ENUM(NSInteger, RTCFileVideoCapturerStatus) {
 }
 
 - (void)setupReaderOnError:(RTCFileVideoCapturerErrorBlock)errorBlock {
+#if defined(WEBRTC_XROS)
+  RTCLog(@"not ported to xros");
+  return;
+#else
   AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_fileURL options:nil];
 
   NSArray *allTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
@@ -99,6 +103,7 @@ typedef NS_ENUM(NSInteger, RTCFileVideoCapturerStatus) {
   [_reader startReading];
   RTCLog(@"File capturer started reading");
   [self readNextBuffer];
+#endif
 }
 - (void)stopCapture {
   _status = RTCFileVideoCapturerStatusStopped;

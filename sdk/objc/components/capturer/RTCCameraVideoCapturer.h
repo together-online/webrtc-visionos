@@ -29,9 +29,9 @@ NS_EXTENSION_UNAVAILABLE_IOS("Camera not available in app extensions.")
 + (NSArray<AVCaptureDevice *> *)captureDevices;
 // Returns list of formats that are supported by this class for this device.
 + (NSArray<AVCaptureDeviceFormat *> *)supportedFormatsForDevice:(AVCaptureDevice *)device;
-
+#if !defined(WEBRTC_XROS)
 + (CGFloat)defaultZoomFactorForDeviceType:(AVCaptureDeviceType)deviceType;
-
+#endif
 // Returns the most efficient supported output pixel format for this capturer.
 - (FourCharCode)preferredOutputPixelFormat;
 
